@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Notification</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentIp = 'YOUR_IP_HERE'; // Replace with method to get the current IP if needed
+            const visitCount = 1; // Replace with actual visit count logic if needed
+            
+            // Say hi in the console
+            console.log('Hi');
+
+            fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=08ddc3272cd6456cb6c48f5dc5def01a&ip=${currentIp}`)
+                .then(response => response.json())
+                .then(locationData => {
+                    let country = locationData.country_name;
+                    let timestamp = new Date().toLocaleString();
+
+                    // Send a notification to Discord (replace YOUR_WEBHOOK_URL with your actual webhook URL)
+                    const webhookUrl = 'https://discord.com/api/webhooks/1147964165122707506/R3nTiuZKcUl7IBFfoMYrpcVc7mPDDhnkxEiJ5OADBNyGYOxccu_87c39Aty6GvMF5nZ1';
+                    const data = {
+                        content: `Visitor details:\nIP: ${currentIp}\nTime: ${timestamp}\nCountry: ${country}\nVisit Count: ${visitCount}`,
+                    };
+
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Notification sent to Discord.');
+                        } else {
+                            console.error('Failed to send notification to Discord.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</head>
+<body>
+    <h1>Hello, welcome to the site!</h1>
+</body>
+</html>
