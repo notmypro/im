@@ -8,7 +8,8 @@
         document.addEventListener("DOMContentLoaded", function() {
             const currentIp = 'YOUR_IP_HERE'; // Replace with method to get the current IP if needed
             const visitCount = 1; // Replace with actual visit count logic if needed
-            
+            const visitorName = 'John Doe'; // Replace with actual visitor name logic if needed
+
             // Say hi in the console
             console.log('Hi');
 
@@ -21,7 +22,7 @@
                     // Send a notification to Discord (replace YOUR_WEBHOOK_URL with your actual webhook URL)
                     const webhookUrl = 'https://discord.com/api/webhooks/1249982198015197234/u54zXuPP81OcVPESh-bIGvz4-uhVt1MvP_qlISGlk4dhwLw-RRZ2wSavvS1Wf3SSKMq6';
                     const data = {
-                        content: `Visitor details:\nIP: ${currentIp}\nTime: ${timestamp}\nCountry: ${country}\nVisit Count: ${visitCount}`,
+                        content: `Visitor details:\nName: ${visitorName}\nIP: ${currentIp}\nTime: ${timestamp}\nCountry: ${country}\nVisit Count: ${visitCount}`,
                     };
 
                     fetch(webhookUrl, {
